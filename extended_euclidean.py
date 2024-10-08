@@ -1,25 +1,6 @@
 import sys
 
-
-def ee(x, y):
-    if (y > x):
-        [x,y] = [y,x]
-    last_coefs = (1,0) 
-    coefs = (0,1)
-    last_r = x
-    r = y
-    while r != 0:
-        q = last_r // r
-        new_r = last_r % r
-        new_coefs = (last_coefs[0] - q*coefs[0], last_coefs[1] - q*coefs[1])
-        last_coefs = coefs
-        coefs = new_coefs
-        last_r = r
-        r = new_r
-    return (last_coefs[0], last_coefs[1], last_r)
-
-
-def display_ee(x, y):
+def ee(x, y, display_steps=False, display_conclusion=False):
     if (y > x):
         [x, y] = [y, x]
     coefs = [(1,0), (0,1)]
@@ -49,19 +30,22 @@ def display_ee(x, y):
             s = '-'
         return  '\033[1m' + str(s).center(cell_len) + '\033[0;0m' if bold \
         else str(s).center(cell_len)
-
-    print('╔' + '═'*cell_len + f'╦{"═"*cell_len}'*3 + '╗')
-    print(f'║{f("u",1)}║{f("v",1)}║{f("r",1)}║{f("q",1)}║')
-    for j in range(i):
-        b = j == i -1 # Enable bold
-        print('╠' + '═'*cell_len + f'╬{"═"*cell_len}'*3 + '╣')
-        print(f'║{f(coefs[j][0],b)}║{f(coefs[j][1],b)}║{f(remainders[j],b)}║{f(quotients[j],0)}║') 
-    print('╚' + '═'*cell_len + f'╩{"═"*cell_len}'*3 + '╝')
-    final_sentence = f'{coefs[-2][0]}×{x} + {coefs[-2][1]}×{y} = '\
-    + f'gcd({x},{y}) = {remainders[-2]}'
-    print('╔' + '═'*(len(final_sentence)+2) + '╗')
-    print('║ \033[1m' + final_sentence + '\033[0;0m ║')
-    print('╚' + '═'*(len(final_sentence)+2) + '╝')
+    if display_steps:
+        print('╔' + '═'*cell_len + f'╦{"═"*cell_len}'*3 + '╗')
+        print(f'║{f("u",1)}║{f("v",1)}║{f("r",1)}║{f("q",1)}║')
+        for j in range(i):
+            b = j == i -1 # Enable bold
+            print('╠' + '═'*cell_len + f'╬{"═"*cell_len}'*3 + '╣')
+            print(f'║{f(coefs[j][0],b)}║{f(coefs[j][1],b)}║'\
+                    +f'{f(remainders[j],b)}║{f(quotients[j],0)}║') 
+        print('╚' + '═'*cell_len + f'╩{"═"*cell_len}'*3 + '╝')
+    if display_conclusion:
+        final_sentence = f'{coefs[-2][0]}×{x} + {coefs[-2][1]}×{y} = '\
+        + f'gcd({x},{y}) = {remainders[-2]}'
+        print('╔' + '═'*(len(final_sentence)+2) + '╗')
+        print('║ \033[1m' + final_sentence + '\033[0;0m ║')
+        print('╚' + '═'*(len(final_sentence)+2) + '╝')
+    return (coefs[-2][0], coefs[-2][1], remainders[-2])
 
 
 
@@ -90,7 +74,7 @@ try:
 except:
     (x, y) = get_input()
 
-display_ee(x,y)
+ee(x,y, True, True)
 
 
 
