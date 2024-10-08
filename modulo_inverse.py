@@ -16,7 +16,7 @@ else:
     else:
         values = ee(x, y, True, False)
         if (values[2] != 1):
-            print(f'{x} has \033[1m no inverse \033[0;0m modulo {y}.')
+            print(f'{x} has \033[1mno inverse\033[0;0m modulo {y}.')
         else:
             inv = values[1]
             if inv < 0:
