@@ -13,6 +13,8 @@ def get_int(name, can_negative=False, can_null=False):
             x = int(input(query))
             if not can_negative and x < 0 or not can_null and x == 0:
                 raise ValueError()
+        except KeyboardInterrupt:
+            sys.exit()
         except:
             x = None
     return x
