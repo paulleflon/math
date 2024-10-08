@@ -5,7 +5,7 @@ def ee(x, y, display_steps=False, display_conclusion=False):
         [x, y] = [y, x]
     coefs = [(1,0), (0,1)]
     remainders = [x, y]
-    quotients = [-1, -1]
+    quotients = [None, None]
     i = 1
     largest_len  = 1 
     while remainders[i] != 0:
@@ -26,7 +26,7 @@ def ee(x, y, display_steps=False, display_conclusion=False):
     
     cell_len = largest_len + 2
     def f(s, bold = False):
-        if s == -1:
+        if s == None:
             s = '-'
         return  '\033[1m' + str(s).center(cell_len) + '\033[0;0m' if bold \
         else str(s).center(cell_len)
