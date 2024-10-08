@@ -1,4 +1,5 @@
 import sys
+import _utils as u
 
 
 def power2_decomp(x):
@@ -62,15 +63,14 @@ def pow(base, exp, modulo):
         curr = (curr * base) % modulo
     return curr
 
-x = None
-y = None
-z = None
-try:
-    x = int(sys.argv[1])
-    y = int(sys.argv[2])
-    z = int(sys.argv[3])
-    if x < 0 or y < 1 or z < 1: raise ValueError()
-except:
-    print('Please input three non-zero positive integers')
-else:
-    pow_developed(x,y,z)
+args = u.get_arg()
+
+x = next(args)
+y = next(args)
+z = next(args)
+if x == None or y == None or z == None:
+    x = u.get_int('base')
+    y = u.get_int('exponent')
+    z = u.get_int('modulo')
+
+pow_developed(x,y,z)

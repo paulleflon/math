@@ -1,4 +1,5 @@
 import sys
+import _utils as u
 
 def ee(x, y, display_steps=False, display_conclusion=False):
     if (y > x):
@@ -68,15 +69,12 @@ x = None
 y = None
 
 if __name__ == '__main__':
-    try:
-        x = int(sys.argv[1])
-        y = int (sys.argv[2])
-        if x < 1 or y < 1: raise ValueError()
-    except:
-        (x, y) = get_input()
-
+    args = u.get_arg()
+    x = next(args)
+    y = next(args)
+    if x == None or y == None:
+        (x, y) = (u.get_int('u'), u.get_int('v'))
     ee(x,y, True, True)
-
 
 
 
