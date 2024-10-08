@@ -67,14 +67,15 @@ def get_input():
 x = None
 y = None
 
-try:
-    x = int(sys.argv[1])
-    y = int (sys.argv[2])
-    if x < 1 or y < 1: raise ValueError()
-except:
-    (x, y) = get_input()
+if __name__ == '__main__':
+    try:
+        x = int(sys.argv[1])
+        y = int (sys.argv[2])
+        if x < 1 or y < 1: raise ValueError()
+    except:
+        (x, y) = get_input()
 
-ee(x,y, True, True)
+    ee(x,y, True, True)
 
 
 
