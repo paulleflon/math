@@ -45,6 +45,8 @@ def display_ee(x, y):
     
     cell_len = largest_len + 2
     def f(s, bold = False):
+        if s == -1:
+            s = '-'
         return  '\033[1m' + str(s).center(cell_len) + '\033[0;0m' if bold \
         else str(s).center(cell_len)
 
