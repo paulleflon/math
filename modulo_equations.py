@@ -48,6 +48,6 @@ if __name__ == '__main__':
     z = next(args)
     if x == None or y == None or z == None:
         x = u.get_int('a')
-        y = u.get_int('b')
+        y = u.get_int('b', False, True)
         z = u.get_int('modulo')
     solve(x,y,z)
