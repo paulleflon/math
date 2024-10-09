@@ -52,3 +52,13 @@ python3 modulo_equations.py <a> <b> <modulo>
 - `a`: a non-null positive integer
 - `b`: a non-null positive integer
 - `modulo`:a non-null positive integer
+
+### Modulo Inverse List
+Gives the list of invertible numbers and their inverses in a ring.
+```bash
+python3 modulo_inverse_list <modulo>
+```
+
+### Arguments
+- `modulo`: a non-null positive integer
+
