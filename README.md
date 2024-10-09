@@ -62,3 +62,10 @@ python3 modulo_inverse_list <modulo>
 ### Arguments
 - `modulo`: a non-null positive integer
 
+### Prime factors
+Computes prime factors decomposition of the given number
+```bash
+python3 prime_decomp.py <n>
+```
+#### Arguments
+- `n`: a non-null positive integer
