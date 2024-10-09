@@ -1,3 +1,4 @@
+import functools
 from math import sqrt
 from modulo_powers import superscript
 import _utils as u
@@ -45,6 +46,12 @@ def prime_decomp(n, display=False):
     if display:
         render = ' × '.join([f'{key}{superscript(decomp[key])}' for key in decomp])
         print(f'{n} = \033[1m{render}\033[0;0m')
+        render = ' × '.join([f'({v} + 1)' for v in decomp.values()]) \
+                + ' = ' + ' × '.join([f'{v + 1}' for v in decomp.values()])
+        dc = functools.reduce(lambda a, b: a*b, [v + 1 for v in decomp.values()])
+        print(f'Hence, {n} has:', render, '=', \
+                f'\033[1m{dc} divisors\033[0;0m')
+
     return decomp
 
 
