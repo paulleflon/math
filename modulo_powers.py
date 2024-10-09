@@ -63,14 +63,15 @@ def pow(base, exp, modulo):
         curr = (curr * base) % modulo
     return curr
 
-args = u.get_arg()
+if __name__ == '__main__':
+    args = u.get_arg()
 
-x = next(args)
-y = next(args)
-z = next(args)
-if x == None or y == None or z == None:
-    x = u.get_int('base')
-    y = u.get_int('exponent')
-    z = u.get_int('modulo')
+    x = next(args)
+    y = next(args)
+    z = next(args)
+    if x == None or y == None or z == None:
+        x = u.get_int('base')
+        y = u.get_int('exponent')
+        z = u.get_int('modulo')
 
-pow_developed(x,y,z)
+    pow_developed(x,y,z)

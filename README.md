@@ -41,3 +41,14 @@ python3 modulo_powers.py <base> <exponent> <modulo>
 - `base`: a non-null positive integer lower than `modulo`
 - `exponent`: the exponent of the power to compute, non-null positive integer
 - `modulo`: the modulo to compute the power in, a non-null positive integer
+
+### Modulo Linear Equations
+Solves a linear equation (`ax = b`) in a ring
+
+```bash
+python3 modulo_equations.py <a> <b> <modulo>
+```
+#### Arguments
+- `a`: a non-null positive integer
+- `b`: a non-null positive integer
+- `modulo`:a non-null positive integer

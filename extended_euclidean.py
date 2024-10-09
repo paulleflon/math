@@ -69,7 +69,7 @@ x = None
 y = None
 
 if __name__ == '__main__':
-    args = u.get_arg()
+    args = u.get_arg(True, False)
     x = next(args)
     y = next(args)
     if x == None or y == None:
