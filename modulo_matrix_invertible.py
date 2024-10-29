@@ -21,7 +21,7 @@ def determinant(matrix):
 
 
 def is_invertible_modulo(matrix, modulo):
-	det = determinant(matrix)
+	det = determinant(matrix) % modulo
 	gcd = ee(det, modulo)[2]
 	print(gcd, det)
 	return gcd == 1
