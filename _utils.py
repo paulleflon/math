@@ -34,3 +34,41 @@ def get_arg(can_negative=False, can_null=False):
             return
         except:
             yield None
+
+
+def input_matrix():
+    print('Please input the matrix line by line, separating the elements by spaces. Enter \'end\' to finish.')
+    matrix = []
+    while True:
+        line = input()
+        line = line.strip().lower()
+        if line == 'end': break
+        splitted = line.split(' ')
+        row = []
+        success = True
+        for value in splitted:
+            try:
+                parsed = int(value)
+                row.append(parsed)
+            except ValueError:
+                print(f'\'{value}\' is not a valid integer. Please enter the row again.')
+                success = False
+        if success and len(matrix) and len(matrix[0]) != len(row):
+            print(f'The current row size ({len(row)}) doesn\'t match the matrix\'s row size ({len(matrix[0])}). Please enter the row again.')
+            success = False
+        if success:
+            matrix.append(row)
+    return matrix
+
+def input_modulo_matrix(modulo):
+    matrix = input_matrix()
+    for row in matrix:
+        for i in range(len(row)):
+            row[i] = row[i] % modulo
+    return matrix
+
+def print_matrix(matrix):
+    for row in matrix:
+        for i in row:
+            print(i, end=' ')
+        print()

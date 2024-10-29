@@ -69,3 +69,9 @@ python3 prime_decomp.py <n>
 ```
 #### Arguments
 - `n`: a non-null positive integer
+
+### Modulo Matrix invertibility
+Verifies if a Matrix is invertible in a given ring.
+```bash
+python3 modulo_matrix_invertible.py
+```
