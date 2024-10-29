@@ -1,5 +1,5 @@
 import sys
-import _utils as u
+import shared.utils as u
 
 
 def power2_decomp(x):

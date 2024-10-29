@@ -1,5 +1,5 @@
 import copy
-from _utils import input_modulo_matrix, get_int, print_matrix
+from shared.utils import input_modulo_matrix, get_int, print_matrix
 from extended_euclidean import ee
 
 def determinant(matrix):

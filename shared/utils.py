@@ -60,6 +60,22 @@ def input_matrix():
             matrix.append(row)
     return matrix
 
+def menu(options, title=''):
+    n = len(options)
+    print(title)
+    for i in range(len(options)):
+        print(f'{i + 1}. {options[i]}')
+    selection = None
+    while selection == None:
+        try:
+            s = input(f'Please choose [1-{n}]:')
+            s = int(s)
+            if (s < 1 or s > n):
+                raise ValueError
+            selection = s - 1
+        except:
+            continue
+    return selection
 def input_modulo_matrix(modulo):
     matrix = input_matrix()
     for row in matrix:

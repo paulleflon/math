@@ -1,6 +1,6 @@
 import sys
 from extended_euclidean import ee
-import _utils as u
+import shared.utils as u
 
 args = u.get_arg()
 x = next(args)

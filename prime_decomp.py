@@ -1,7 +1,7 @@
 import functools
 from math import sqrt
 from modulo_powers import superscript
-import _utils as u
+import shared.utils as u
 
 
 def is_prime(n):

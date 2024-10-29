@@ -1,4 +1,43 @@
 from copy import deepcopy
+from shared.arithmetics import gcd, mult_inverse
+
+def matrix_sum(matrix1, matrix2):
+	if len(matrix1) != len(matrix2) or len(matrix1[0]) != len(matrix2[0]):
+		return None
+	result = deepcopy(matrix1)
+	for i in range(len(matrix1)):
+		for j in range(len(matrix1[i])):
+			result[i][j] += matrix2[i][j]
+	return result
+
+def matrix_scalar(matrix, scalar):
+	result = deepcopy(matrix)
+	for i in range(len(matrix)):
+		for j in range(len(matrix[i])):
+			result[i][j] *= scalar
+	return result
+
+def matrix_modulo(matrix, modulo):
+	result = deepcopy(matrix)
+	for i in range(len(matrix)):
+		for j in range(len(matrix[i])):
+			result[i][j] %= modulo
+	return result
+
+def matrix_product(matrix1, matrix2):
+	if len(matrix1[0]) != len(matrix2):
+		raise ValueError('Matrix sizes do not match.')
+	result = []
+	for i in range(len(matrix1)):
+		row = []
+		for j in range(len(matrix2[0])):
+			s = 0
+			for k in range(len(matrix1[0])):
+				s += matrix1[i][k] * matrix2[k][j]
+			row.append(s)
+		result.append(row)
+	return result
+
 
 def minor_matrix(matrix, i, j):
 	matrix = deepcopy(matrix)
@@ -32,6 +71,13 @@ def inverse_matrix(matrix):
 			inverse[j][i] = (1/det) * determinant(minor_matrix(matrix, i, j)) * (-1)**(i+j)
 	return inverse
 
-
-print(inverse_matrix([[0,7,2],[5,4,0],[8,0,2]]))
-	
+def modular_inverse_matrix(matrix, modulo):
+	det = determinant(matrix) % modulo
+	g = gcd(det, modulo)
+	if g != 1:
+		return None
+	inverse = deepcopy(matrix)
+	for i in range(len(matrix)):
+		for j in range(len(matrix[i])):
+			inverse[j][i] = (mult_inverse(det, modulo) * determinant(minor_matrix(matrix, i, j))%modulo) * (-1)**(i+j) % modulo
+	return inverse

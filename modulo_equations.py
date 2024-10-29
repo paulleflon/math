@@ -1,4 +1,4 @@
-import _utils as u
+import shared.utils as u
 from extended_euclidean import ee
 from modulo_powers import o, superscript
 
