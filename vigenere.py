@@ -8,15 +8,15 @@ full_alphabet = {
 	'!': 41, '(': 42, ')': 43, ' ': 44
 }
 english_alphabet = {chr(i): i - 97 for i in range(97, 123)}
-print(english_alphabet)
 
-def decipher(message, A, B, alphabet):
+def decipher(message, A, B, alphabet, print_details=False):
 	reverse_alphabet = {v: k for k, v in alphabet.items()}
-	print(reverse_alphabet)
 	modulo = len(alphabet)
-	print(modulo)
 	keyA = modular_inverse_matrix(A, modulo)
 	keyB = matrix_modulo(matrix_product(matrix_scalar(keyA, -1), B), modulo)
+	if print_details:
+		print('Deciphering key:')
+		print(f'( {keyA}, {keyB} )')
 	deciphered = ''
 	gram_k = len(B)
 	for i in range(0, len(message), gram_k):
@@ -26,13 +26,22 @@ def decipher(message, A, B, alphabet):
 		dec = matrix_sum(matrix_modulo(matrix_product(keyA, gram), modulo), keyB)
 		dec = matrix_modulo(dec, modulo)
 		for j in range(gram_k):
-			print(dec[j][0])
 			deciphered+= reverse_alphabet[dec[j][0]]
 	return deciphered
 
 if __name__ == '__main__':
-	choice = menu(['Cipher message', 'Decipher message'], 'Choose the desired action')
-	alphabet = full_alphabet if menu(['English alphabet (26 letters)', 'Full alphabet (45 characters)'], 'Choose an alphabet') == 2 else english_alphabet
+	action_choice = menu(['Cipher message', 'Decipher message'], 'Choose the desired action')
+	alphabet_choice = menu(['English alphabet (26 letters)', 'Full alphabet (45 characters)', 'Custom...', 'Arbitrary (useful for simple key deciphering)'], 'Choose an alphabet')
+	alphabet = None
+	if alphabet_choice == 2:
+		raw = input('Please input the alphabet. The first character corresponds to 0, and so on:').split('')
+		alphabet = {raw[i]: i for i in range(len(raw))}
+	elif alphabet_choice == 3:
+		length = get_int('length of alphabet')
+		alphabet = {chr(33 + i): i for i in range(length)}
+		print(f'Your alphabet is: {alphabet}')
+	else:
+		alphabet = full_alphabet if alphabet_choice == 1 else english_alphabet
 	message = input('Please enter the message:')
 	print('Please enter key matrix A')
 	A = input_modulo_matrix(len(alphabet))
@@ -47,7 +56,8 @@ if __name__ == '__main__':
 	if len(B) != len(A):
 		print('Height of B must be same as height of A')
 		exit()
-	if choice == 0:
+	if action_choice == 0:
 		pass
-	else:
-		print(f'Deciphered message: {decipher(message, A, B, alphabet)}')
+	elif action_choice == 1:
+		print('===')
+		print(f'Deciphered message: {decipher(message, A, B, alphabet, True)}')
